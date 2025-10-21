@@ -27,6 +27,7 @@ main{max-width:min(var(--max),96vw); margin:2rem auto; padding:0 1rem}
   padding:.5rem .75rem; border:1px solid var(--line); border-radius:8px; z-index:9999;
 }
 
+/* NAV responsive */
 .site-nav{
   position:fixed; inset:0 0 auto 0; height:var(--nav-h); z-index:1000;
   background:rgba(233,234,236,.85);
@@ -39,11 +40,15 @@ main{max-width:min(var(--max),96vw); margin:2rem auto; padding:0 1rem}
   display:flex; gap:.6rem; flex-wrap:wrap; justify-content:center; align-items:center;
   width:100%; max-width:min(var(--max),96vw);
 }
+.site-nav li{flex:0 0 auto}
 .site-nav a{
-  position:relative; display:inline-block; padding:.56rem 1rem;
+  position:relative; display:inline-block;
+  padding:.56rem 1rem;
   border:1px solid var(--line); border-radius:999px;
   color:var(--primary); background:transparent;
-  text-transform:uppercase; letter-spacing:.09em; font-weight:900; font-size:.82rem; white-space:nowrap;
+  text-transform:uppercase; letter-spacing:.09em; font-weight:900;
+  font-size:clamp(.72rem,1.6vw,.82rem); white-space:nowrap;
+  scroll-snap-align:start;
 }
 .site-nav a::after{
   content:""; position:absolute; left:12%; right:12%; bottom:-6px; height:4px;
@@ -51,6 +56,30 @@ main{max-width:min(var(--max),96vw); margin:2rem auto; padding:0 1rem}
   border-radius:3px;
 }
 .site-nav a:hover::after,.site-nav a:focus-visible::after{transform:scaleX(1)}
+
+/* overflow horizontal en móviles con fundidos laterales */
+@media (max-width:720px){
+  :root{--nav-h:86px}
+  .site-nav{position:fixed}
+  .site-nav ul{
+    justify-content:flex-start; gap:.5rem;
+    flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x proximity; padding:.75rem .75rem;
+  }
+  .site-nav ul::-webkit-scrollbar{height:0}
+  .site-nav{position:fixed}
+  .site-nav::before,
+  .site-nav::after{
+    content:""; position:absolute; top:0; bottom:0; width:26px; pointer-events:none;
+  }
+  .site-nav::before{
+    left:0; background:linear-gradient(90deg, rgba(233,234,236,1), rgba(233,234,236,0));
+  }
+  .site-nav::after{
+    right:0; background:linear-gradient(270deg, rgba(233,234,236,1), rgba(233,234,236,0));
+  }
+  .site-nav a{padding:.5rem .75rem}
+}
 
 .cover{
   min-height:75vh; display:grid; place-content:center; text-align:center;
@@ -164,7 +193,6 @@ main{counter-reset:sec}
   .title{font-size:clamp(2.6rem,10vw,5.4rem)}
 }
 @media (max-width:560px){
-  :root{--nav-h:76px}
   .site-nav a{padding:.5rem .7rem; font-size:.76rem}
   .site-section::before{display:none}
   .iframe-wrap{border-width:1.5px; border-radius:8px}
