@@ -1,23 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--
+	Archivo: index.html
+	Propósito: Página principal del proyecto "My Web Project - WEB ATELIER (UDIT)".
+
+	Estructura principal:
+		- <head>: metadatos (charset, viewport, title, description) y enlace a CSS.
+		- <body>: contenido semántico dividido en header, main y footer.
+		- Al final se carga el script principal en assets/js/main.js.
+
+	Notas rápidas / mejoras sugeridas:
+		- Internacionalización: actualizar el atributo lang y preparar recursos i18n.
+		- SEO/Redes sociales: añadir meta tags Open Graph y Twitter Card.
+		- Rendimiento: usar preload/preconnect, critical CSS y cargar scripts con "defer" o como módulos.
+		- PWA: añadir manifest.json y un Service Worker para soporte offline.
+		- Accesibilidad: probar con Lighthouse/axe y mejorar el contraste/orden de tabulación si hace falta.
+		- Arquitectura: separar componentes, usar un bundler (Vite, webpack) si la app crece.
+-->
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>My Web Project - WEB ATELIER (UDIT)</title>
 		<meta name="description" content="A student web project for WEB ATELIER (UDIT) course" />
+		<!--
+			Enlaces y recursos principales:
+			- style.css: hoja de estilos principal del proyecto.
+			Mejoras posibles:
+			- Usar <link rel="preload" as="style"> para CSS crítico.
+			- Añadir meta tags Open Graph y Twitter Card para mejor compartición en redes.
+			- Considerar <link rel="manifest" href="/manifest.json"> para PWA.
+		-->
 		<link rel="stylesheet" href="assets/css/style.css" />
 	</head>
 	<body>
+		<!--
+			Enlace "skip" para accesibilidad: permite a usuarios de teclado/screen readers
+			saltar directamente al contenido principal.
+			Asegúrate de que .skip-link sea visible al recibir foco (CSS) y no solo con display:none.
+		-->
 		<a href="#main" class="skip-link">Skip to main content</a>
 
 		<header>
 			<div class="container">
+				<!--
+					Encabezado principal (site-wide header).
+					Contiene el título del sitio y una breve línea descriptiva.
+					Considera añadir navegación principal (<nav>) cuando el sitio tenga más secciones.
+				-->
 				<h1>My Web Project</h1>
 				<p>Student Project - WEB ATELIER (UDIT)</p>
 			</div>
 		</header>
 
 		<main id="main" class="container">
+			<!--
+				Contenido principal de la página. Usamos elementos semánticos:
+				- <main> contiene la parte única del documento.
+				- <section> agrupa bloques temáticos.
+				Mejoras/Extensiones:
+				- Añadir roles ARIA cuando elementos dinámicos lo requieran.
+				- Dividir en componentes reutilizables (ej. partials) si se usa un templating engine.
+			-->
 			<section>
 				<h2>Welcome</h2>
 				<p>
@@ -41,11 +84,22 @@
 					<a href="https://github.com/[username]/[project-repo]/commits/main">commit history</a>
 					to see weekly progress.
 				</p>
+				<!--
+					Ideas para esta sección:
+					- Mostrar un feed embebido de commits o un changelog generado automáticamente.
+					- Usar la API de GitHub para listar commits o releases (serverless function o fetch desde cliente con CORS/control de tokens).
+				-->
 			</section>
 		</main>
 
 		<footer>
 			<div class="container">
+				<!--
+					Pie de página: información legal, enlaces de interés y créditos.
+					Mejoras:
+					- Añadir enlaces a políticas (privacy, terms) y contactos.
+					- Añadir microformatos/structured data si el sitio necesita SEO avanzado.
+				-->
 				<p>© 2025 [Your Name] — WEB ATELIER (UDIT) · Web Design (2025 Fall).</p>
 				<p>
 					<a href="https://github.com/ruvebal/web-atelier-udit">Course Framework</a>
@@ -55,6 +109,13 @@
 			</div>
 		</footer>
 
+		<!--
+			Script principal: contiene la lógica JS del proyecto.
+			Recomendaciones:
+			- Añadir atributo defer para que no bloquee el parsing del HTML: <script src="assets/js/main.js" defer></script>
+			- Si se usa ES modules, usar type="module".
+			- Mantener la lógica mínima en el cliente; usar APIs/servicios para funcionalidades complejas.
+		-->
 		<script src="assets/js/main.js"></script>
 	</body>
 </html>
